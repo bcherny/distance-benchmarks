@@ -10,7 +10,7 @@ import Units (Lat, Lng, Mi)
 main :: IO ()
 main = do
 
-  let ps = take 50 pairs
+  let ps = take 50 $ drop 450 pairs
 
   haversines <- mapM (dist haversineDistance) ps
   taxicabs <- mapM (dist taxicabDistance) ps
