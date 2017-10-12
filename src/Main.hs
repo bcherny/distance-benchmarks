@@ -9,23 +9,19 @@ import Units (Lat, Lng, Mi)
 
 main :: IO ()
 main = do
-  -- let hs = map (dist haversineDistance) pairs
-  -- let ts = map (dist taxicabDistance) pairs
-  -- putStrLn $ show hs
-  -- putStrLn $ show ts
 
-  let ps = take 2 pairs
+  let ps = take 50 pairs
 
-  let haversines = map (dist haversineDistance) pairs
-  let taxicabs = map (dist taxicabDistance) pairs
-  googles <- mapM (\(a, b) -> googleDistance a b) ps
-  mapboxes <- mapM (\(a, b) -> mapboxDistance a b) ps
+  haversines <- mapM (dist haversineDistance) ps
+  taxicabs <- mapM (dist taxicabDistance) ps
+  googles <- mapM (dist googleDistance) ps
+  mapboxes <- mapM (dist mapboxDistance) ps
 
   putStrLn $ show $ zip4 haversines taxicabs googles mapboxes
 
-dist :: ((Lat, Lng) -> (Lat, Lng) -> Mi)
+dist :: ((Lat, Lng) -> (Lat, Lng) -> IO (Maybe Mi))
   -> ((Lat, Lng), (Lat, Lng))
-  -> Mi
+  -> IO (Maybe Mi)
 dist f (a, b) = f a b
 
 pairs :: [((Lat, Lng), (Lat, Lng))]

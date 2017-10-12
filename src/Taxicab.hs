@@ -2,10 +2,11 @@ module Taxicab (taxicabDistance) where
 
 import Units (Lat, Lng, Mi)
 
-taxicabDistance :: (Lat, Lng) -> (Lat, Lng) -> Mi
+taxicabDistance :: (Lat, Lng) -> (Lat, Lng) -> IO (Maybe Mi)
 taxicabDistance (a, b) (c, d) =
-  (latDiffToMi latDiff) + (lngDiffToMi a lngDiff)
-  where latDiff = (diff a c)
+  return $ Just dist
+  where dist = (latDiffToMi latDiff) + (lngDiffToMi a lngDiff)
+        latDiff = (diff a c)
         lngDiff = (diff b d)
 
 latDiffToMi :: Lat -> Mi

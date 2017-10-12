@@ -4,9 +4,10 @@ import Control.Arrow ((***))
 import Units (Km, Lat, Lng, Mi)
 
 -- The latitude and longtitude are assumed to be in degrees.
-haversineDistance :: (Lat, Lng) -> (Lat, Lng) -> Mi
-haversineDistance a b = kmToMi $ distDeg 6371 a b
+haversineDistance :: (Lat, Lng) -> (Lat, Lng) -> IO (Maybe Mi)
+haversineDistance a b = return $ Just mi
   where
+    mi = kmToMi $ distDeg 6371 a b
     distDeg radius p1 p2 = distRad radius (deg2rad p1) (deg2rad p2)
     distRad radius (lat1, lng1) (lat2, lng2) =
       (2 * radius) *
