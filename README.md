@@ -5,19 +5,9 @@
 ## Methods
 
 - Haversine distance
+- Taxicab distance (abs(x) + abs(y))
 - Google directions distance
 - Mapbox directions distance
-
-## Usage
-
-Install NodeJS and [Yarn](https://yarnpkg.com/en/), then:
-
-```sh
-git clone git@github.com:bcherny/distance-benchmarks.git
-cd distance-benchmarks
-yarn
-cat input.csv | ./node_modules/.bin/ts-node src/index.ts > output.csv
-```
 
 ## Test dataset
 
